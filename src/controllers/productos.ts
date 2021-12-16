@@ -1,0 +1,141 @@
+import { Request, Response, NextFunction } from 'express';
+
+import { productsAPI } from '../apis/products';
+import {
+  ProductQuery,
+  newProductI,
+  Error,
+  newProductU,
+  ProductI,
+} from '../models/productos/products.interfaces';
+import logger from '../config/logger';
+import { schemaAddProduct, schemaUpdateProduct } from '../helpers/validators';
+
+class Producto {
+  async checkProductExists(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    try {
+      const producto = await productsAPI.getProducts(id);
+
+      if (producto.length === 0) {
+        const error: Error = new Error(`Product doesn't exist`);
+        error.statusCode = 404;
+        throw error;
+      }
+      next();
+    } catch (err: any) {
+      logger.error(err);
+      next(err);
+    }
+  }
+
+  async getProducts(req: Request, res: Response, next: NextFunction) {
+    try {
+      let data = await productsAPI.getProducts();
+
+      return res.json(data);
+    } catch (err: any) {
+      logger.error(err);
+      next(err);
+    }
+  }
+
+  async getProductByCategory(req: Request, res: Response, next: NextFunction) {
+    const { categoria } = req.params;
+    try {
+      if (!categoria || typeof categoria !== 'string') {
+        const error: Error = new Error(
+          'Please insert a category or a valid category',
+        );
+        error.statusCode = 400;
+        throw error;
+      }
+      const producto = await productsAPI.query({
+        categoria: categoria.toLowerCase(),
+      });
+      if (producto.length === 0) return res.status(404).json(producto);
+      return res.json(producto);
+    } catch (err) {
+      logger.error(err);
+      next(err);
+    }
+  }
+
+  async addProducts(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await schemaAddProduct.validateAsync(req.body);
+
+      const newProduct = {
+        nombre: result.nombre,
+        precio: result.precio,
+        descripcion: result.descripcion,
+        codigo: result.codigo,
+        categoria: result.categoria.toLowerCase(),
+        fotos: [],
+        stock: result.stock,
+      };
+      const product = await productsAPI.addProduct(newProduct);
+
+      res.status(201).json({
+        msg: 'Producto agregado con exito',
+        data: product,
+      });
+    } catch (err: any) {
+      if (err.isJoi === true) err.statusCode = 400;
+
+      logger.error(err);
+      next(err);
+    }
+  }
+
+  async updateProducts(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id: string = req.params.id;
+      if (!id) {
+        const error: Error = new Error('Please insert an id');
+        error.statusCode = 400;
+        throw error;
+      }
+      const result = await schemaUpdateProduct.validateAsync(req.body);
+      let updateProduct: newProductU = {};
+
+      if (result.nombre) updateProduct.nombre = result.nombre;
+      if (result.precio) updateProduct.precio = result.precio;
+      if (result.categoria) updateProduct.categoria = result.categoria;
+      if (result.descripcion) updateProduct.descripcion = result.descripcion;
+      if (result.stock) updateProduct.stock = result.stock;
+
+      const updatedItem = await productsAPI.updateProduct(id, updateProduct);
+
+      res.json({
+        msg: 'Producto actualizado con exito  ',
+        data: updatedItem,
+      });
+    } catch (err: any) {
+      if (err.isJoi === true) err.statusCode = 400;
+      logger.error(err);
+      next(err);
+    }
+  }
+
+  async deleteProducts(req: Request, res: Response, next: NextFunction) {
+    const id: string = req.params.id;
+
+    try {
+      if (!id) {
+        const error: Error = new Error('Please insert an id');
+        error.statusCode = 400;
+        throw error;
+      }
+      await productsAPI.deleteProduct(id);
+      res.status(200).json({
+        msg: 'Producto borrado',
+      });
+    } catch (err: any) {
+      logger.error(err);
+      next(err);
+    }
+  }
+}
+
+export const productsController = new Producto();
