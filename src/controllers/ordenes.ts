@@ -52,7 +52,8 @@ class Orden {
       }
       if (req.usuario) {
         const usuario = req.usuario;
-        const orden = await ordenesAPI.postOrden(
+
+        const ordenUpdated = await ordenesAPI.postOrden(
           usuario._id.toString(),
           orderId,
         );
@@ -60,7 +61,10 @@ class Orden {
         const message = 'Su orden fue completada con exito';
         await EmailService.sendEmail(usuario.email, subject, message);
 
-        res.json(orden);
+        res.json({
+          msg: 'Su orden fue completada',
+          ordenUpdated,
+        });
       }
     } catch (err) {
       logger.error(err);

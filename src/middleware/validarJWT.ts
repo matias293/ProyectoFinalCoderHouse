@@ -22,7 +22,7 @@ export const validarJWT = async (
   const token = req.header('Bearer-Token');
 
   if (!token) {
-    return res.status(401).json({
+    return res.status(400).json({
       msg: 'No hay token en la petición',
     });
   }
@@ -42,6 +42,7 @@ export const validarJWT = async (
         msg: 'Unathorized.',
       });
     }
+
     req.usuario = usuario;
     next();
   } catch (error) {
