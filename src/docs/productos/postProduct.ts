@@ -37,6 +37,17 @@ export default {
         },
       },
 
+      400: {
+        description: `Error in the input body`,
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/ErrorValidate',
+            },
+          },
+        },
+      },
+
       401: {
         description: `Login and user role errors`,
         content: {
@@ -54,13 +65,12 @@ export default {
           },
         },
       },
-
-      400: {
-        description: `Error in the input body`,
+      500: {
+        description: 'The token has expires',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorValidate',
+              $ref: '#/components/schemas/errorJWTexpires',
             },
           },
         },

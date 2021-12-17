@@ -92,8 +92,8 @@ class Carrito {
     const quantity = Number(cantidad);
 
     try {
-      if (!id) {
-        const error: Error = new Error('Please insert a product id');
+      if (!id || typeof id !== 'string') {
+        const error: Error = new Error('Please insert a valid id');
         error.statusCode = 400;
         throw error;
       }
@@ -135,13 +135,14 @@ class Carrito {
     }
   }
 
+  //Elimina una cantidad
   async deleteCarritoProduct(req: Request, res: Response, next: NextFunction) {
     const { id, cantidad } = req.body;
     const quantity = Number(cantidad);
 
     try {
       if (!id || typeof id !== 'string') {
-        const error: Error = new Error('Please insert a product id');
+        const error: Error = new Error('Please insert a product id valid');
         error.statusCode = 400;
         throw error;
       }

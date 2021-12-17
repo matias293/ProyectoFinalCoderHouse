@@ -53,6 +53,12 @@ export class OrderAtlasDAO implements OrdenBaseClass {
   }
 
   async getOrden(idUser: string, idOrden: string): Promise<Orden> {
+    const idValid = this.client.isValidId(idOrden);
+    if (!idValid) {
+      const error: Error = new Error('El id no es valido de mongo');
+      error.statusCode = 400;
+      throw error;
+    }
     const orden = await this.orders.findOne({ userId: idUser, _id: idOrden });
     if (!orden) {
       const error: Error = new Error('Orden not found');

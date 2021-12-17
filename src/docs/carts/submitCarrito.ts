@@ -17,7 +17,7 @@ export default {
     ],
 
     responses: {
-      201: {
+      200: {
         description: 'Su compra se realizo correctamente',
         content: {
           'application/json': {
@@ -27,24 +27,15 @@ export default {
           },
         },
       },
-      401: {
-        description: 'Error with token',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT',
-            },
-          },
-        },
-      },
+
       400: {
-        description: `Product doesn't exist | Choose more stock that have the product | amount it's not a number `,
+        description: ``,
         content: {
           'application/json': {
             schema: {
               type: 'object',
               properties: {
-                ErrorQuantity: {
+                ErrorCarrito: {
                   type: 'object',
                   description: `Cart is doesnt't have products `,
                   properties: {
@@ -65,12 +56,32 @@ export default {
           },
         },
       },
+      401: {
+        description: 'Error with token',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/ErrorValidateJWT',
+            },
+          },
+        },
+      },
       404: {
-        description: 'The cart of the user doesn t exist',
+        description: 'There is no message with the sistem',
         content: {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/ErrorCartNotExist',
+            },
+          },
+        },
+      },
+      500: {
+        description: 'The token has expired',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
             },
           },
         },

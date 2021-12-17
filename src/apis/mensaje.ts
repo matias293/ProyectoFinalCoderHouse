@@ -1,8 +1,8 @@
 import { MensajesFactoryDAO } from '../models/mensajes/mensajes.factory';
 
 import Config from '../config/index';
-import { newMensaje } from '../models/mensajes/mensajes.intefaces';
-import { Mensaje } from '../models/mensajes/mensajes.intefaces';
+import { newMensaje, MensajesDTO } from '../models/mensajes/mensajes.intefaces';
+
 import { TypeModel } from './TipoPersistencia';
 
 const tipo = TypeModel.get(Config.ENVIROMENT);
@@ -14,7 +14,7 @@ export class mensAPI {
     this.mensajes = MensajesFactoryDAO.get(tipo);
   }
 
-  async getMensajes(idUser: string): Promise<Mensaje[]> {
+  async getMensajes(idUser: string): Promise<MensajesDTO[]> {
     return await this.mensajes.get(idUser);
   }
 
@@ -22,5 +22,4 @@ export class mensAPI {
     return await this.mensajes.add(messageData);
   }
 }
-
 export const mensajeAPI = new mensAPI();

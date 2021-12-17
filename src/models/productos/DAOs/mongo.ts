@@ -65,14 +65,13 @@ export class ProductosAtlasDAO implements ProductBaseClass {
         throw error;
       }
       const product: ProductI = await this.productos.findById(id);
-      if (product) output.push(product);
+
+      if (product) {
+        output.push(product);
+      }
     } else {
       const products = await this.productos.find();
-      if (products.length === 0) {
-        const error: Error = new Error('Not products avaibles');
-        error.statusCode = 404;
-        throw error;
-      }
+
       output = products as unknown as ProductI[];
     }
 
@@ -87,6 +86,12 @@ export class ProductosAtlasDAO implements ProductBaseClass {
   }
 
   async update(id: string, newProductData: newProductU): Promise<ProductI> {
+    const idValid = this.client.isValidId(id);
+    if (!idValid) {
+      const error: Error = new Error('El id no es valido de mongo');
+      error.statusCode = 400;
+      throw error;
+    }
     const updateProduct = await this.productos.findByIdAndUpdate(
       id,
       newProductData,
@@ -96,6 +101,12 @@ export class ProductosAtlasDAO implements ProductBaseClass {
   }
 
   async delete(id: string) {
+    const idValid = this.client.isValidId(id);
+    if (!idValid) {
+      const error: Error = new Error('El id no es valido de mongo');
+      error.statusCode = 400;
+      throw error;
+    }
     await this.productos.findByIdAndDelete(id);
   }
 

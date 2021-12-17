@@ -64,6 +64,16 @@ export default {
           },
         },
       },
+      500: {
+        description: 'The cart of the user doesn t exist',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
+            },
+          },
+        },
+      },
     },
   },
 };

@@ -17,7 +17,7 @@ export default {
     ],
     responses: {
       200: {
-        description: 'Product in the cart was obtained',
+        description: 'Show the cart of the user',
         content: {
           'application/json': {
             schema: {
@@ -27,7 +27,7 @@ export default {
         },
       },
       404: {
-        description: 'The cart does not exists ',
+        description: `The cart wasn't found `,
         content: {
           'application/json': {
             schema: {
@@ -43,6 +43,16 @@ export default {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/ErrorValidateJWT',
+            },
+          },
+        },
+      },
+      500: {
+        description: 'The token has expired',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
             },
           },
         },

@@ -15,6 +15,6 @@ export interface newMensaje {
 }
 
 export interface MensajesDTO {
-  mensaje: string;
-  tipo: string;
+  message: string;
+  from: string;
 }

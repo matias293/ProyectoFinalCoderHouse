@@ -23,7 +23,7 @@ class Orden {
     const { orderId } = req.params;
     try {
       if (!orderId || typeof orderId !== 'string') {
-        const error: Error = new Error('Please insert a valid OrderId');
+        const error: Error = new Error('Please insert a valid orderId');
         error.statusCode = 400;
         throw error;
       }

@@ -28,7 +28,7 @@ const validarJWT = async (token: string): Promise<UserI | null> => {
 
 const mensajeController = async (mensaje: string, userId?: string) => {
   if (mensaje == 'stock') {
-    return await productsAPI.query({ stock: 1 });
+    return await productsAPI.query({ minStock: 1 });
   } else if (mensaje === 'orden') {
     const ordenes = await ordenesAPI.getOrdenes(userId as string);
     return ordenes[ordenes.length - 1];
@@ -53,8 +53,6 @@ export const initWsServer = (server: http.Server): void => {
 
       const user = await validarJWT(token);
       if (user) {
-        console.log('entro aca');
-
         await mensajeAPI.addMensajes({
           userId: user._id,
           mensaje,
@@ -65,7 +63,10 @@ export const initWsServer = (server: http.Server): void => {
           msge: mensaje,
         });
 
-        let respuesta = await mensajeController(mensaje, user._id.toString());
+        let respuesta = await mensajeController(
+          mensaje.toLowerCase(),
+          user._id.toString(),
+        );
         if (typeof respuesta === 'object') {
           respuesta = JSON.stringify(respuesta);
         }

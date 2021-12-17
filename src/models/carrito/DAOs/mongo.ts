@@ -136,13 +136,19 @@ export class CartsAtlasDAO implements CartBaseClass {
   client: MyMongoClient;
   private carts: typeof CartModel;
 
-  constructor(local: boolean = false) {
+  constructor(local?: boolean) {
     this.client = new MyMongoClient();
     this.client.connect(local);
     this.carts = model('Carrito', carritoSchema);
   }
 
   async get(userId: string): Promise<CartI> {
+    const idValid = this.client.isValidId(userId);
+    if (!idValid) {
+      const error: Error = new Error('El id no es valido de mongo');
+      error.statusCode = 400;
+      throw error;
+    }
     const cart: CartI = await this.carts.findOne({ userId });
 
     return cart;
@@ -208,14 +214,19 @@ export class CartsAtlasDAO implements CartBaseClass {
       throw error;
     }
     const amountProduct: number = cart.products[index].quantity;
-    if (amountProduct <= amount) {
+    if (amountProduct < amount) {
       const error: Error = new Error(
         `You don't have that quantity in your cart, please check it`,
       );
       error.statusCode = 400;
       throw error;
     } else {
-      cart.products[index].quantity = amountProduct - amount;
+      const rest = amountProduct - amount;
+      if (rest === 0) {
+        cart.products.splice(index, 1);
+      } else {
+        cart.products[index].quantity = rest;
+      }
     }
 
     await cart.save();
@@ -229,6 +240,6 @@ export class CartsAtlasDAO implements CartBaseClass {
       error.statusCode = 404;
       throw error;
     }
-    await cart.clearCart();
+    return await cart.clearCart();
   }
 }

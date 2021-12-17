@@ -35,6 +35,16 @@ export default {
           },
         },
       },
+      400: {
+        description: `Problem with the id  `,
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/ErrorId',
+            },
+          },
+        },
+      },
       401: {
         description: 'Error with token',
         content: {
@@ -51,6 +61,16 @@ export default {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/errorOrder',
+            },
+          },
+        },
+      },
+      500: {
+        description: 'The token has expired',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
             },
           },
         },

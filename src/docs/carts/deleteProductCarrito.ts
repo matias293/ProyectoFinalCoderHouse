@@ -47,6 +47,9 @@ export default {
             schema: {
               type: 'object',
               properties: {
+                errorId: {
+                  $ref: '#/components/schemas/ErrorId',
+                },
                 ErrorQuantity: {
                   type: 'object',
 
@@ -90,6 +93,16 @@ export default {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/ErrorCartNotExist',
+            },
+          },
+        },
+      },
+      500: {
+        description: 'The Token it s expire you should login again',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
             },
           },
         },

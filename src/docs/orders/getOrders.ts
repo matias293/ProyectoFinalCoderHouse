@@ -46,6 +46,16 @@ export default {
           },
         },
       },
+      500: {
+        description: 'The token has expired',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
+            },
+          },
+        },
+      },
     },
   },
 };

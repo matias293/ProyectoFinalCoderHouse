@@ -36,31 +36,22 @@ export default {
           },
         },
       },
-      401: {
-        description: 'Error with token',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT',
-            },
-          },
-        },
-      },
+
       400: {
-        description: `Product doesn't exist | Choose more stock that have the product | amount it's not a number `,
+        description: `Problem with the id |Product doesn't exist | Choose more stock that have the product | amount it's not a number `,
         content: {
           'application/json': {
             schema: {
               type: 'object',
               properties: {
-                ErrorId: {
+                ErrorStock: {
                   type: 'object',
-                  description: `The id is missing `,
+                  description: `Don't have that quantity on the stock `,
                   properties: {
                     message: {
                       type: 'string',
                       description: 'Message of error',
-                      example: 'Ingresar id del producto',
+                      example: 'There is not stock please check it',
                     },
                     status: {
                       type: 'number',
@@ -68,6 +59,9 @@ export default {
                       example: '400',
                     },
                   },
+                },
+                errorId: {
+                  $ref: '#/components/schemas/ErrorId',
                 },
                 errorQuantity: {
                   $ref: '#/components/schemas/ErrorQuantity',
@@ -80,40 +74,32 @@ export default {
           },
         },
       },
-      422: {
-        description: `They didn't send any image `,
+      401: {
+        description: 'Error with token',
         content: {
           'application/json': {
             schema: {
-              type: 'object',
-              properties: {
-                ErrorId: {
-                  type: 'object',
-                  description: `The image is missing `,
-                  properties: {
-                    message: {
-                      type: 'string',
-                      description: 'Message of error',
-                      example: 'Seleccione alguna imagen',
-                    },
-                    status: {
-                      type: 'number',
-                      description: 'Number of error',
-                      example: '422',
-                    },
-                  },
-                },
-              },
+              $ref: '#/components/schemas/ErrorValidateJWT',
             },
           },
         },
       },
       404: {
-        description: 'The cart or the product you want to add does not exists.',
+        description: 'The cart of the user doesn t exist',
         content: {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/ErrorCartNotExist',
+            },
+          },
+        },
+      },
+      500: {
+        description: 'The token has expired',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
             },
           },
         },

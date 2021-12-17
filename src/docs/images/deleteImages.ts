@@ -38,6 +38,7 @@ export default {
             schema: {
               type: 'object',
               properties: {
+                errId: { $ref: '#/components/schemas/ErrorId' },
                 errJWT: { $ref: '#/components/schemas/ErrorValidateJWT' },
                 errAdmin: { $ref: '#/components/schemas/ErrorAdmin' },
               },
@@ -51,6 +52,16 @@ export default {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/ErrorImageNotExist',
+            },
+          },
+        },
+      },
+      500: {
+        description: 'The token has expired',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
             },
           },
         },

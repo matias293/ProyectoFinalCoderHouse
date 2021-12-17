@@ -312,22 +312,16 @@ export default {
         type: 'object',
         description: 'A chat message.',
         properties: {
-          id: {
-            $ref: '#/componentes/schemas/MensajeId',
-          },
-          userId: {
-            $ref: '#/componentes/schemas/User',
-          },
-          mensaje: {
+          message: {
             type: 'string',
             description: 'Text in the message.',
             example: 'stock',
           },
-          tipo: {
+          from: {
             type: 'string',
             description:
               'Indicates if the message was sent by the user or by the system.',
-            example: 'GENERADO',
+            example: 'Yo',
           },
         },
       },
@@ -451,6 +445,23 @@ export default {
           },
         },
       },
+      errorJWTexpires: {
+        type: 'object',
+        description: `The order doesn't exist in the DB`,
+
+        properties: {
+          message: {
+            type: 'string',
+            description: 'Message of error',
+            example: 'jwt expires',
+          },
+          status: {
+            type: 'number',
+            description: 'Number of error',
+            example: '500',
+          },
+        },
+      },
       errorOrder: {
         type: 'object',
         description: `The order doesn't exist in the DB`,
@@ -465,6 +476,21 @@ export default {
             type: 'number',
             description: 'Number of error',
             example: '404',
+          },
+        },
+      },
+      ErrorId: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            description: 'Message of error',
+            example: `Please insert a product id valid`,
+          },
+          status: {
+            type: 'number',
+            description: 'Number of error',
+            example: '400',
           },
         },
       },
@@ -495,7 +521,7 @@ export default {
       },
       ErrorProductCart: {
         type: 'object',
-        description: `The product doesn't exist`,
+        description: `The product doesn't exist in the cart`,
         properties: {
           message: {
             type: 'string',
@@ -516,7 +542,8 @@ export default {
           message: {
             type: 'string',
             description: 'Message of error',
-            example: '"someimput" must be a string',
+            example:
+              '"someimput" must be a string or "someimput" it s required',
           },
           status: {
             type: 'number',

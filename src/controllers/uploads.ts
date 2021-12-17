@@ -16,7 +16,7 @@ class Image {
     const foto = (req as MulterRequest).file;
     try {
       if (!productId) {
-        const error: Error = new Error('Ingresar id del producto');
+        const error: Error = new Error('Ingresar id valido');
         error.statusCode = 400;
         throw error;
       }

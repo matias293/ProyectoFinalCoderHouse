@@ -6,6 +6,9 @@ export interface CartI {
   _id: string;
   userId: productReference;
   products: ProductCart[];
+  direccion: Direccion;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface CartIPopulate {

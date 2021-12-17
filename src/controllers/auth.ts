@@ -78,19 +78,6 @@ class Auth {
       next(err);
     }
   }
-
-  postLogOut(req: Request, res: Response) {
-    if (!req.isAuthenticated()) {
-      return res.json({ message: 'Usted no se encuentra logeado' });
-    }
-    req.session.destroy(err => {
-      if (err)
-        res.status(500).json({ message: 'Hubo un error al cerrar sesion' });
-      else {
-        res.json({ message: 'Se cerró su sesion correctmanete' });
-      }
-    });
-  }
 }
 
 export const authController = new Auth();

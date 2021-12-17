@@ -3,7 +3,7 @@ export interface newProductI {
   descripcion: string;
   categoria: string;
   precio: number;
-  fotos: Imagen[];
+  fotos?: Imagen[];
   stock: number;
 }
 export interface Imagen {
@@ -34,7 +34,7 @@ export interface OptionsQuery {
 }
 export interface ProductQuery {
   categoria?: string;
-  stock?: number;
+  minStock?: number;
 }
 
 export interface ProductBaseClass {

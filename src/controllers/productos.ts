@@ -32,7 +32,7 @@ class Producto {
   async getProducts(req: Request, res: Response, next: NextFunction) {
     try {
       let data = await productsAPI.getProducts();
-
+      if (data.length === 0) return res.status(404).json(data);
       return res.json(data);
     } catch (err: any) {
       logger.error(err);

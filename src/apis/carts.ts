@@ -59,7 +59,7 @@ class Cart {
   }
 
   async clearCart(cartId: string) {
-    await this.carts.clearCart(cartId);
+    return await this.carts.clearCart(cartId);
   }
 }
 

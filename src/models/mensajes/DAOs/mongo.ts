@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 import MensajeDto from '../DTO/mensaje';
 import { Error } from '../../error.interface';
-import { Mensaje, newMensaje } from '../mensajes.intefaces';
+import { Mensaje, newMensaje, MensajesDTO } from '../mensajes.intefaces';
 import { MyMongoClient } from '../../../services/dbMongo';
 
 const messageSchema = new Schema({
@@ -15,7 +15,7 @@ messageSchema.methods.toJSON = function () {
   const { __v, ...data } = this.toObject();
   return data;
 };
-
+export const MensajeModel = model('Mensaje', messageSchema);
 export class MensajesAtlasDAO {
   client: MyMongoClient;
   private mensajes: any;
@@ -26,18 +26,18 @@ export class MensajesAtlasDAO {
     this.mensajes = model('Mensaje', messageSchema);
   }
 
-  async get(userId: string) {
-    let mensajes: Mensaje[] = [];
+  async get(userId: string): Promise<MensajesDTO[]> {
+    let mensajesDTO: MensajesDTO[];
 
-    mensajes = await this.mensajes.find({ userId });
-    if (mensajes.length === 0) {
-      const error: Error = new Error('Usted no tiene mensajes');
-      error.statusCode = 400;
-      throw error;
+    let mensajes = await this.mensajes.find({ userId });
+    if (mensajes.length > 0) {
+      mensajesDTO = mensajes.map(
+        (msg: Mensaje) => new MensajeDto(msg.mensaje, msg.tipo),
+      );
+      mensajes = mensajesDTO;
     }
-    return mensajes.map(
-      (msg: Mensaje) => new MensajeDto(msg.mensaje, msg.tipo),
-    );
+
+    return mensajes as any as MensajesDTO[];
   }
 
   async add(messageData: newMensaje): Promise<void> {

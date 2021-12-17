@@ -7,7 +7,7 @@ import { NoticiasFactoryDAO } from '../models/productos/products.factory';
 import { ProductQuery } from '../models/productos/products.interfaces';
 import Config from '../config/index';
 import { TypeModel } from './TipoPersistencia';
-
+console.log(Config.ENVIROMENT);
 const tipo = TypeModel.get(Config.ENVIROMENT);
 
 class prodAPI {
@@ -20,6 +20,7 @@ class prodAPI {
   async getProducts(id?: string) {
     if (id) {
       const product = await this.productos.get(id);
+
       return product;
     }
 

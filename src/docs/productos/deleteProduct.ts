@@ -1,7 +1,7 @@
 export default {
   delete: {
     tags: ['Products'],
-    description: 'Update a product.',
+    description: 'Delete a product.',
     operationId: 'deleteProducts',
     parameters: [
       {
@@ -28,16 +28,16 @@ export default {
     responses: {
       200: {
         description: 'Producto borrado',
-        content: {
-          'application/json': {},
-        },
       },
-      404: {
-        description: `The product doesn't exist`,
+      400: {
+        description: `Problem with the id  `,
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorProduct',
+              type: 'object',
+              properties: {
+                $ref: '#/components/schemas/ErrorId',
+              },
             },
           },
         },
@@ -55,6 +55,27 @@ export default {
                   $ref: '#/components/schemas/ErrorAdmin',
                 },
               },
+            },
+          },
+        },
+      },
+      404: {
+        description: `The product doesn't exist`,
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/ErrorProduct',
+            },
+          },
+        },
+      },
+
+      500: {
+        description: 'The token has expired',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/errorJWTexpires',
             },
           },
         },

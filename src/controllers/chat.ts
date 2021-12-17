@@ -14,7 +14,7 @@ class Mensaje {
       if (req.usuario) {
         const user = req.usuario;
         const mensajes = await mensajeAPI.getMensajes(user._id.toString());
-        if (!mensajes) {
+        if (mensajes.length === 0) {
           const error: Error = new Error('No hay mensajes guardados');
           error.statusCode = 404;
           throw error;
