@@ -64,7 +64,7 @@ class Carrito {
           };
           total = total + prod.productId.precio * prod.quantity;
           items.push(produc);
-          message += `${prod.productId.nombre} - Cantidad ${prod.quantity} \n`;
+          message += ``\n<br><h1>${prod.productId.nombre} - Cantidad ${prod.quantity} </h1> <br> \n`;`;
         });
         const orderData = {
           userId: _id,
