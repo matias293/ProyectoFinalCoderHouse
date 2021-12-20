@@ -81,7 +81,9 @@ export class OrderAtlasDAO implements OrdenBaseClass {
   async postOrdenes(userId: string, orderId: string): Promise<Orden> {
     const order = await this.getOrden(userId, orderId);
     if (order.estado !== 'GENERADO') {
-      const error: Error = new Error('No se encuentra en estado generada');
+      const error: Error = new Error(
+        'La orden no se encuentra en estado generada',
+      );
       error.statusCode = 400;
       throw error;
     }

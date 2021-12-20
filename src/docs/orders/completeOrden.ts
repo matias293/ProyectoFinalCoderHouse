@@ -82,7 +82,7 @@ export default {
                     message: {
                       type: 'string',
                       description: 'Message of error',
-                      example: 'No se encuentra en estado generada',
+                      example: 'La orden no se encuentra en estado generada',
                     },
                     status: {
                       type: 'number',
