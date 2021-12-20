@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { NewOrden, Orden, OrdenBaseClass } from '../orden.interface';
 import { MyMongoClient } from '../../../services/dbMongo';
-import { Error } from '../../error.interface';
+import { Error } from '../orden.interface';
 
 const ordenSchema = new mongoose.Schema<Orden>({
   userId: {

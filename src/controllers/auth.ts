@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import bcryptjs from 'bcryptjs';
 
-import { Error } from '../models/error.interface';
+import { Error } from '../models/users/user.interface';
 import { generarJWT } from '../helpers/generarJWT';
 import logger from '../config/logger';
 import { UserAPI } from '../apis/users';

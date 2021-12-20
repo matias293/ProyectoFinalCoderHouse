@@ -29,3 +29,8 @@ export interface OrdenBaseClass {
   getOrdenes(userId: string): Promise<Orden[]>;
   postOrdenes(userId: string, idOrden: string): Promise<Orden>;
 }
+
+export interface Error {
+  statusCode?: number;
+  message?: string;
+}

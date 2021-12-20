@@ -1,17 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { productsAPI } from '../apis/products';
-import {
-  ProductQuery,
-  newProductI,
-  Error,
-  newProductU,
-  ProductI,
-} from '../models/productos/products.interfaces';
+import { Error, newProductU } from '../models/productos/products.interfaces';
 import logger from '../config/logger';
 import { schemaAddProduct, schemaUpdateProduct } from '../helpers/validators';
 
 class Producto {
+  //Chequa si el productoi existe
   async checkProductExists(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     try {
@@ -29,6 +24,7 @@ class Producto {
     }
   }
 
+  //Obtiene todos los productos
   async getProducts(req: Request, res: Response, next: NextFunction) {
     try {
       let data = await productsAPI.getProducts();
@@ -40,6 +36,7 @@ class Producto {
     }
   }
 
+  //Obtiene un producto por la categoria seleccionada
   async getProductByCategory(req: Request, res: Response, next: NextFunction) {
     const { categoria } = req.params;
     try {
@@ -61,6 +58,7 @@ class Producto {
     }
   }
 
+  //Agrega un producto
   async addProducts(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await schemaAddProduct.validateAsync(req.body);
@@ -88,6 +86,7 @@ class Producto {
     }
   }
 
+  //Actualiza un producto
   async updateProducts(req: Request, res: Response, next: NextFunction) {
     try {
       const id: string = req.params.id;
@@ -118,6 +117,7 @@ class Producto {
     }
   }
 
+  //Elimina un producto
   async deleteProducts(req: Request, res: Response, next: NextFunction) {
     const id: string = req.params.id;
 

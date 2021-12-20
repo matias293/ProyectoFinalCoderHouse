@@ -19,13 +19,7 @@ export default {
     responses: {
       200: {
         description: 'Su compra se realizo correctamente',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/Cart',
-            },
-          },
-        },
+        content: {},
       },
 
       400: {

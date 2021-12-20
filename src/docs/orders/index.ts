@@ -1,5 +1,6 @@
 import getOrden from './getOrden';
 import getOrdenes from './getOrders';
+import completeOrder from './completeOrden';
 export default {
   'api/orders/': {
     ...getOrdenes,
@@ -7,5 +8,7 @@ export default {
   'api/orders/{orderId}': {
     ...getOrden,
   },
-  'api/orders/complete': {},
+  'api/orders/complete': {
+    ...completeOrder,
+  },
 };

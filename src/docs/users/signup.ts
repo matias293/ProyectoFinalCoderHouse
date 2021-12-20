@@ -14,7 +14,7 @@ export default {
               telefono: {
                 type: 'string',
                 description: 'User phone number',
-                example: '+5632937',
+                example: '2645632938',
               },
               email: {
                 type: 'string',
@@ -23,14 +23,13 @@ export default {
               },
               password: {
                 type: 'string',
-                description:
-                  'Minimum eight characters, at least one letter, one number and one special character: ',
-                example: 'sanlorenzo,18',
+                description: ' ',
+                example: 'sanlorenzo18',
               },
-              repeatPassword: {
+              repeat_password: {
                 type: 'string',
                 description: ' Must be the same as password.',
-                example: 'sanlorenzo,18*',
+                example: 'sanlorenzo18',
               },
               nombre: {
                 type: 'string',
@@ -53,11 +52,11 @@ export default {
                 example: 'Q8300',
               },
               piso: {
-                type: 'number',
+                type: 'string',
                 description: 'User address floor number, optional.',
                 example: '1',
               },
-              depto: {
+              departamento: {
                 type: 'string',
                 description: 'User address department number, optional.',
                 example: '23',

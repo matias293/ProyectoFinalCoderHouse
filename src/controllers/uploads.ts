@@ -2,15 +2,14 @@ import { Request, Response, NextFunction } from 'express';
 
 import logger from '../config/logger';
 import { productsAPI } from '../apis/products';
-import { Error } from '../models/error.interface';
+import { Error } from '../models/productos/products.interfaces';
 import { deleteFile } from '../util/file';
-import { ProductI, Imagen } from '../models/productos/products.interfaces';
-
 interface MulterRequest extends Request {
   file: any;
 }
 
 class Image {
+  //Agrega una imagen al producto
   async postImage(req: Request, res: Response, next: NextFunction) {
     const { productId } = req.body;
     const foto = (req as MulterRequest).file;
@@ -49,6 +48,7 @@ class Image {
     }
   }
 
+  //Obtiene la imagen del producto
   async getImage(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     try {
@@ -67,6 +67,7 @@ class Image {
     }
   }
 
+  //Elimina una imagen seleccionado del producto
   async deleteImage(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     try {

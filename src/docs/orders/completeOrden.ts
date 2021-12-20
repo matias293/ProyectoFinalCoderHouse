@@ -20,11 +20,7 @@ export default {
       content: {
         'application/json': {
           schema: {
-            OrderId: {
-              type: 'string',
-              description: 'OrderId',
-              example: '61bb70a20b8d5576288a5aa6',
-            },
+            $ref: '#/components/schemas/OrderId',
           },
         },
       },
@@ -35,34 +31,73 @@ export default {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/Order',
+              Order: {
+                type: 'object',
+                description: 'An Order.',
+                properties: {
+                  user: {
+                    $ref: '#/components/schemas/UserId',
+                  },
+                  items: {
+                    properties: 'array',
+                    $ref: '#/components/schemas/ProductOrder',
+                  },
+                  total: {
+                    type: 'number',
+                    description: 'Total price of the order.',
+                    example: '1500',
+                  },
+
+                  timestamp: {
+                    type: 'string',
+                    description: 'Date and time when the order was created.',
+                    example: '2021-12-01T00:02:43.013Z',
+                  },
+                  estado: {
+                    type: 'string',
+                    description: 'The status of the order',
+                    example: 'FINALIZADO',
+                  },
+                  id: {
+                    $ref: '#/components/schemas/OrderId',
+                  },
+                },
+              },
             },
           },
         },
       },
       400: {
-        description: `Problem with the id  `,
+        description: `Problem with the id `,
         content: {
           'application/json': {
             schema: {
-              ErrorEstado: {
-                type: 'object',
-                description: `Status of the order it's not genrated`,
+              type: 'object',
+              properties: {
+                ErrorEstado: {
+                  type: 'object',
+                  description: `Status of the order it's not genrated`,
 
-                properties: {
-                  message: {
-                    type: 'string',
-                    description: 'Message of error',
-                    example: 'No se encuentra en estado generada',
-                  },
-                  status: {
-                    type: 'number',
-                    description: 'Number of error',
-                    example: '400',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      description: 'Message of error',
+                      example: 'No se encuentra en estado generada',
+                    },
+                    status: {
+                      type: 'number',
+                      description: 'Number of error',
+                      example: '400',
+                    },
                   },
                 },
+                errId: {
+                  $ref: '#/components/schemas/ErrorId',
+                },
+                errMongoId: {
+                  $ref: '#/components/schemas/ErrorIdMongo',
+                },
               },
-              $ref: '#/components/schemas/ErrorId',
             },
           },
         },

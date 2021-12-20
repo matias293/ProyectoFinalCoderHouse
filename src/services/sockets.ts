@@ -27,21 +27,26 @@ const validarJWT = async (token: string): Promise<UserI | null> => {
 };
 
 const mensajeController = async (mensaje: string, userId?: string) => {
-  if (mensaje == 'stock') {
-    return await productsAPI.query({ minStock: 1 });
-  } else if (mensaje === 'orden') {
-    const ordenes = await ordenesAPI.getOrdenes(userId as string);
-    return ordenes[ordenes.length - 1];
-  } else if (mensaje === 'carrito') {
-    return await CartAPI.getCart(userId as string);
-  }
-  const message = `
+  switch (mensaje) {
+    case 'stock':
+      return await productsAPI.query({ minStock: 1 });
+
+    case 'orden':
+      const ordenes = await ordenesAPI.getOrdenes(userId as string);
+      return ordenes[ordenes.length - 1];
+
+    case 'carrito':
+      return await CartAPI.getCart(userId as string);
+
+    default:
+      const message = `
   \n Hola! No he podido comprender tu mensaje. Por favor ingresa una de las siguientes opciones
   \nStock: Para conocer nuestro stock actual.
   \n Orden:Para conocer la informacion de tu ultima orden
   \n Carrito:Para concer el estado actual de tu carrito
     `;
-  return message;
+      return message;
+  }
 };
 
 export const initWsServer = (server: http.Server): void => {

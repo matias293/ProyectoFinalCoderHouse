@@ -2,19 +2,21 @@ import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 
 import { CartAPI } from '../apis/carts';
 import { ordenesAPI } from '../apis/orden';
-import { Error } from '../models/error.interface';
+
 import { UserI } from '../models/users/user.interface';
 import { Items } from '../models/ordenes/orden.interface';
 import {
   ProductCartPopulate,
   productReference,
+  Error,
 } from '../models/carrito/carrito.interfaces';
 import logger from '../config/logger';
 import { EmailService } from '../services/gmail';
-
+import { productCarrito } from '../helpers/validators';
 import { productsAPI } from '../apis/products';
 
 class Carrito {
+  //obtiene el carro del usuario
   async getCarrito(req: Request, res: Response, next: NextFunction) {
     try {
       if (req.usuario) {
@@ -36,6 +38,7 @@ class Carrito {
     }
   }
 
+  //Finalizar compra
   async postCarrito(req: Request, res: Response, next: NextFunction) {
     try {
       if (req.usuario) {
@@ -86,41 +89,34 @@ class Carrito {
     }
   }
 
+  //Agregar una cantidad de productos al carro
   async addCarritoProduct(req: Request, res: Response, next: NextFunction) {
-    const { id, cantidad } = req.body;
-
-    const quantity = Number(cantidad);
-
     try {
-      if (!id || typeof id !== 'string') {
-        const error: Error = new Error('Please insert a valid id');
-        error.statusCode = 400;
-        throw error;
-      }
-      if (!quantity) {
-        const error: Error = new Error('Please insert a valid quantity');
-        error.statusCode = 400;
-        throw error;
-      }
+      const result = await productCarrito.validateAsync(req.body);
+
       if (req.usuario) {
         const user = req.usuario as UserI;
         const cartId = user._id;
 
-        const productId = await productsAPI.getProducts(id);
+        const productId = await productsAPI.getProducts(result.id);
         if (productId.length === 0) {
           const error: Error = new Error('Product doesn t exist');
           error.statusCode = 400;
           throw error;
         }
         const producto = productId[0];
-        if (producto.stock < quantity) {
+        if (producto.stock < result.cantidad) {
           const error: Error = new Error('There is not stock please check it');
           error.statusCode = 400;
           throw error;
         }
-        const resto = producto.stock - quantity;
-        await productsAPI.updateProduct(id, { stock: resto });
-        const updatedCart = await CartAPI.addProduct(cartId, id, quantity);
+        const resto = producto.stock - result.cantidad;
+        await productsAPI.updateProduct(result.id, { stock: resto });
+        const updatedCart = await CartAPI.addProduct(
+          cartId,
+          result.id,
+          result.cantidad,
+        );
 
         if (updatedCart) {
           res.json({
@@ -130,49 +126,43 @@ class Carrito {
         }
       }
     } catch (err: any) {
+      if (err.isJoi === true) err.statusCode = 400;
       logger.error(err);
       next(err);
     }
   }
 
-  //Elimina una cantidad
+  //Elimina una cantidad de productos del carro
   async deleteCarritoProduct(req: Request, res: Response, next: NextFunction) {
-    const { id, cantidad } = req.body;
-    const quantity = Number(cantidad);
-
     try {
-      if (!id || typeof id !== 'string') {
-        const error: Error = new Error('Please insert a product id valid');
-        error.statusCode = 400;
-        throw error;
-      }
-      if (!quantity) {
-        const error: Error = new Error('Please insert a valid quantity');
-        error.statusCode = 400;
-        throw error;
-      }
+      const result = await productCarrito.validateAsync(req.body);
 
       if (req.usuario) {
         const user = req.usuario as UserI;
         const userId = user._id;
 
-        const productId = await productsAPI.getProducts(id);
+        const productId = await productsAPI.getProducts(result.id);
         if (productId.length === 0) {
           const error: Error = new Error('Product doesn t exist');
           error.statusCode = 400;
           throw error;
         }
         const producto = productId[0];
-        const carro = await CartAPI.deleteProduct(userId, id, quantity);
-        const newStock = producto.stock + quantity;
+        const carro = await CartAPI.deleteProduct(
+          userId,
+          result.id,
+          result.cantidad,
+        );
+        const newStock = producto.stock + result.cantidad;
 
-        await productsAPI.updateProduct(id, { stock: newStock });
+        await productsAPI.updateProduct(result.id, { stock: newStock });
         res.json({
           msg: 'Producto borrado con exito',
           carro,
         });
       }
     } catch (err: any) {
+      if (err.isJoi === true) err.statusCode = 400;
       logger.error(err);
       next(err);
     }

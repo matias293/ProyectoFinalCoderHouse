@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 
 import { CartAPI } from '../../../apis/carts';
 import {
-  Error,
   NewUserI,
   UserBaseClass,
   UserI,

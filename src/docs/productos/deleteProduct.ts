@@ -36,7 +36,12 @@ export default {
             schema: {
               type: 'object',
               properties: {
-                $ref: '#/components/schemas/ErrorId',
+                errId: {
+                  $ref: '#/components/schemas/ErrorId',
+                },
+                errMongoId: {
+                  $ref: '#/components/schemas/ErrorIdMongo',
+                },
               },
             },
           },

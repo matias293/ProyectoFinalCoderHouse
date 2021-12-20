@@ -6,7 +6,7 @@ import { MyMongoClient } from '../../../services/dbMongo';
 import {
   OptionsQuery,
   newProductI,
-  ProductQuery,
+  Imagen,
   Error,
   ProductBaseClass,
   newProductU,
@@ -100,7 +100,7 @@ export class ProductosAtlasDAO implements ProductBaseClass {
     return updateProduct;
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<void> {
     const idValid = this.client.isValidId(id);
     if (!idValid) {
       const error: Error = new Error('El id no es valido de mongo');
@@ -108,6 +108,7 @@ export class ProductosAtlasDAO implements ProductBaseClass {
       throw error;
     }
     await this.productos.findByIdAndDelete(id);
+    return;
   }
 
   async query(options: OptionsQuery): Promise<ProductI[]> {

@@ -36,7 +36,23 @@ export default {
           },
         },
       },
-
+      400: {
+        description: ``,
+        content: {
+          'application/json': {
+            schema: {
+              properties: {
+                IdMongo: {
+                  $ref: '#/components/schemas/ErrorIdMongo',
+                },
+                errorId: {
+                  $ref: '#/components/schemas/ErrorId',
+                },
+              },
+            },
+          },
+        },
+      },
       401: {
         description: `Login and user role errors`,
         content: {

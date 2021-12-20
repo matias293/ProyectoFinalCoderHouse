@@ -77,11 +77,11 @@ export default {
               example: 'Q8300',
             },
             piso: {
-              type: 'number',
+              type: 'string',
               description: `Floor number,it's optional`,
-              example: '13',
+              example: '13a',
             },
-            depto: {
+            departamento: {
               type: 'string',
               description: 'User address department number, optional.',
               example: '23 c',
@@ -119,11 +119,11 @@ export default {
             example: '1411 N',
           },
           piso: {
-            type: 'number',
+            type: 'string',
             description: 'User address floor number, optional.',
-            example: '13',
+            example: '13a',
           },
-          depto: {
+          departamento: {
             type: 'string',
             description: 'User address department number, optional.',
             example: '23',
@@ -245,11 +245,6 @@ export default {
             description: 'Amount of this product in the order.',
             example: '1',
           },
-          precio: {
-            type: 'number',
-            description: 'Price of the product in the order.',
-            example: '1',
-          },
         },
       },
       Cart: {
@@ -297,7 +292,11 @@ export default {
             description: 'Total price of the order.',
             example: '1500',
           },
-
+          estado: {
+            type: 'string',
+            description: 'The status of the order',
+            example: 'GENERADO',
+          },
           timestamp: {
             type: 'string',
             description: 'Date and time when the order was created.',
@@ -486,6 +485,21 @@ export default {
             type: 'string',
             description: 'Message of error',
             example: `Please insert a product id valid`,
+          },
+          status: {
+            type: 'number',
+            description: 'Number of error',
+            example: '400',
+          },
+        },
+      },
+      ErrorIdMongo: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            description: 'Message of error',
+            example: `El id no es valido de mongo`,
           },
           status: {
             type: 'number',

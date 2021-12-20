@@ -1,8 +1,8 @@
 import { Schema, model } from 'mongoose';
 
 import MensajeDto from '../DTO/mensaje';
-import { Error } from '../../error.interface';
-import { Mensaje, newMensaje, MensajesDTO } from '../mensajes.intefaces';
+
+import { Mensaje, newMensaje, MensajesDTO, Error } from '../mensajes.intefaces';
 import { MyMongoClient } from '../../../services/dbMongo';
 
 const messageSchema = new Schema({

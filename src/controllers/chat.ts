@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import logger from '../config/logger';
 import { mensajeAPI } from '../apis/mensaje';
-import { Error } from '../models/error.interface';
+import { Error } from '../models/mensajes/mensajes.intefaces';
 
 class Mensaje {
   async getChatNew(req: Request, res: Response, next: NextFunction) {

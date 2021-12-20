@@ -5,11 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon dist/index.js",
+    "dev": " nodemon src/index.ts",
     "watch": "tsc --watch",
     "lint-fail": "eslint \"{src,apps,libs}",
-    "build:dev": "npm run build && npm run dev",
-    "build:start": "npm run build && npm run start",
     "start": "node dist/index.js",
     "test": "jest src/tests",
     "lint": "npx eslint ",

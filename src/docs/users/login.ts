@@ -19,7 +19,7 @@ export default {
               password: {
                 type: 'string',
                 description: 'User password.',
-                example: 'sanlorenzo,18',
+                example: 'sanlorenzo18',
               },
             },
           },

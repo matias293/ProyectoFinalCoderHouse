@@ -3,9 +3,11 @@ import { Request, Response, NextFunction } from 'express';
 import { ordenesAPI } from '../apis/orden';
 import logger from '../config/logger';
 import { EmailService } from '../services/gmail';
-import { Error } from '../models/error.interface';
+
+import { Error } from '../models/ordenes/orden.interface';
 
 class Orden {
+  //Trae todas las ordenes que tiene el usuario
   async getOrdenes(req: Request, res: Response, next: NextFunction) {
     try {
       if (req.usuario) {
@@ -19,6 +21,7 @@ class Orden {
     }
   }
 
+  //Trae una orden especifica del usuario
   async getOrden(req: Request, res: Response, next: NextFunction) {
     const { orderId } = req.params;
     try {
@@ -41,6 +44,7 @@ class Orden {
     }
   }
 
+  //Finaliza la orden
   async postOrden(req: Request, res: Response, next: NextFunction) {
     const { orderId } = req.body;
 

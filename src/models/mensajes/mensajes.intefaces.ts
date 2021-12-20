@@ -18,3 +18,8 @@ export interface MensajesDTO {
   message: string;
   from: string;
 }
+
+export interface Error {
+  statusCode?: number;
+  message?: string;
+}

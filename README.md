@@ -2,7 +2,7 @@
 
 Recuerden que deben de ejecutar `npm install` para reconstruir los módulos de Node.
 
-Para correr el servidor recomiendo correr `npm run build:start`
+Para correr el servidor en modo dev `npm run dev`
 
 Para escuchar cambios en typescript `npm run watch`
 

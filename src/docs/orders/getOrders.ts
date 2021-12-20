@@ -21,7 +21,10 @@ export default {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/Order',
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/Order',
+              },
             },
           },
         },
@@ -37,7 +40,7 @@ export default {
         },
       },
       404: {
-        description: 'The order does have orders',
+        description: 'The user doesn t have orders',
         content: {
           'application/json': {
             schema: {

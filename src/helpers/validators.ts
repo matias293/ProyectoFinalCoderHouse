@@ -45,3 +45,8 @@ export const schemaLogin = Joi.object({
     .required(),
   password: Joi.string().required(),
 });
+
+export const productCarrito = Joi.object({
+  id: Joi.string().required(),
+  cantidad: Joi.number().min(1).required(),
+});
