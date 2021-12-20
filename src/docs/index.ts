@@ -8,12 +8,11 @@ import images from './images/index';
 import chat from './chat/index';
 
 export default {
-  // definition: {
   openapi: '3.0.3',
   info: {
     title: 'Ecommerce API',
     version: '1.0.0',
-    description: `An ecommerce that simulate a simple shop builded with Express and MongoDB`,
+    description: `An ecommerce that simulate a simple shop builded with Express and MongoDB, use the patron DAOs, DTO in messages and Factory`,
     license: {
       name: 'MIT',
       url: 'https://spdx.org/licenses/MIT.html',
@@ -40,4 +39,3 @@ export default {
     ...chat,
   },
 };
-// };

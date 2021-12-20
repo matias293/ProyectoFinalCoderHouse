@@ -9,7 +9,7 @@ import { productsAPI } from '../apis/products';
 import { CartAPI } from '../apis/carts';
 import { ordenesAPI } from '../apis/orden';
 import { UserI } from '../models/users/user.interface';
-import logger from '../config/logger';
+import logger from './logger';
 
 const validarJWT = async (token: string): Promise<UserI | null> => {
   try {

@@ -3,7 +3,7 @@ import bcryptjs from 'bcryptjs';
 
 import { Error } from '../models/users/user.interface';
 import { generarJWT } from '../helpers/generarJWT';
-import logger from '../config/logger';
+import logger from '../services/logger';
 import { UserAPI } from '../apis/users';
 import { schemaAuth, schemaLogin } from '../helpers/validators';
 

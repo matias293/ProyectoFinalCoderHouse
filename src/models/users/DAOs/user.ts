@@ -11,7 +11,7 @@ import {
   Direccion,
   UserQuery,
 } from '../user.interface';
-import logger from '../../../config/logger';
+import logger from '../../../services/logger';
 import Config from '../../../config/index';
 
 const UsersSchema = new Schema<NewUserI>({

@@ -1,7 +1,7 @@
 import mongoose, { Schema, model, Types } from 'mongoose';
 import moment from 'moment';
 
-import logger from '../../../config/logger';
+import logger from '../../../services/logger';
 import {
   CartI,
   CartBaseClass,

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 import { UserAPI } from '../apis/users';
-import logger from '../config/logger';
+import logger from '../services/logger';
 import { UserI } from '../models/users/user.interface';
 import Config from '../config/index';
 

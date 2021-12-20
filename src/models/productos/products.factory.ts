@@ -1,5 +1,5 @@
 import { ProductosAtlasDAO } from './DAOs/mongo';
-import logger from '../../config/logger';
+import logger from '../../services/logger';
 
 export enum TipoPersistencia {
   LocalMongo = 'LOCAL-MONGO',

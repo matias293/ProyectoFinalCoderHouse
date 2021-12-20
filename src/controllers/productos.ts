@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { productsAPI } from '../apis/products';
 import { Error, newProductU } from '../models/productos/products.interfaces';
-import logger from '../config/logger';
+import logger from '../services/logger';
 import { schemaAddProduct, schemaUpdateProduct } from '../helpers/validators';
 
 class Producto {

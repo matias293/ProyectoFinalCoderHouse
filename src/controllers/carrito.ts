@@ -10,7 +10,7 @@ import {
   productReference,
   Error,
 } from '../models/carrito/carrito.interfaces';
-import logger from '../config/logger';
+import logger from '../services/logger';
 import { EmailService } from '../services/gmail';
 import { productCarrito } from '../helpers/validators';
 import { productsAPI } from '../apis/products';

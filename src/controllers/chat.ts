@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import logger from '../config/logger';
+import logger from '../services/logger';
 import { mensajeAPI } from '../apis/mensaje';
 import { Error } from '../models/mensajes/mensajes.intefaces';
 

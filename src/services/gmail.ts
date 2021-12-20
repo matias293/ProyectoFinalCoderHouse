@@ -1,6 +1,6 @@
 import Config from '../config';
 import nodemailer from 'nodemailer';
-import logger from '../config/logger';
+import logger from './logger';
 
 interface Owner {
   name: string;

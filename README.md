@@ -2,6 +2,8 @@
 
 Recuerden que deben de ejecutar `npm install` para reconstruir los módulos de Node.
 
+Para transpilar typescript a javascript correr `npm run build` y para escuchar los cambios `npm run watch`
+
 Para correr el servidor en modo dev `npm run dev`
 
 Para escuchar cambios en typescript `npm run watch`

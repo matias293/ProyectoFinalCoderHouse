@@ -4,7 +4,7 @@ import os from 'os';
 
 import Server from './services/server';
 import Config from './config';
-import logger from './config/logger';
+import logger from './services/logger';
 
 const argumentos = minimist(process.argv.slice(2));
 

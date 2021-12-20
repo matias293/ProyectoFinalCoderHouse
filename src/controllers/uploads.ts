@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import logger from '../config/logger';
+import logger from '../services/logger';
 import { productsAPI } from '../apis/products';
 import { Error } from '../models/productos/products.interfaces';
 import { deleteFile } from '../util/file';

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { ordenesAPI } from '../apis/orden';
-import logger from '../config/logger';
+import logger from '../services/logger';
 import { EmailService } from '../services/gmail';
 
 import { Error } from '../models/ordenes/orden.interface';
