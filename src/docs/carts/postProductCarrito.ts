@@ -60,8 +60,8 @@ export default {
                     },
                   },
                 },
-                errorId: {
-                  $ref: '#/components/schemas/ErrorId',
+                errorIdOrCantidad: {
+                  $ref: '#/components/schemas/ErrorIdAddDel',
                 },
                 errorQuantity: {
                   $ref: '#/components/schemas/ErrorQuantity',

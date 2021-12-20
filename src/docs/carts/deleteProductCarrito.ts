@@ -47,8 +47,8 @@ export default {
             schema: {
               type: 'object',
               properties: {
-                errorId: {
-                  $ref: '#/components/schemas/ErrorId',
+                errorIdOrCantidad: {
+                  $ref: '#/components/schemas/ErrorIdAddDel',
                 },
                 ErrorQuantity: {
                   type: 'object',

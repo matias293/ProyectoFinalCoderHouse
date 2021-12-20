@@ -96,6 +96,12 @@ class Producto {
         throw error;
       }
       const result = await schemaUpdateProduct.validateAsync(req.body);
+      if (Object.keys(result).length === 0) {
+        const error: Error = new Error('Please insert some body');
+        error.statusCode = 400;
+        throw error;
+      }
+
       let updateProduct: newProductU = {};
 
       if (result.nombre) updateProduct.nombre = result.nombre;

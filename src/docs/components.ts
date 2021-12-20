@@ -493,6 +493,21 @@ export default {
           },
         },
       },
+      ErrorIdAddDel: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            description: 'Message of error',
+            example: `"id" its required | "\"cantidad\" must be greater than or equal to 1" `,
+          },
+          status: {
+            type: 'number',
+            description: 'Number of error',
+            example: '400',
+          },
+        },
+      },
       ErrorIdMongo: {
         type: 'object',
         properties: {
