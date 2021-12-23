@@ -47,7 +47,7 @@ export default {
           telefono: {
             type: 'string',
             description: 'User phone number',
-            example: '+5632937',
+            example: '2645632938',
           },
           email: {
             type: 'string',
@@ -137,7 +137,7 @@ export default {
           telefono: {
             type: 'string',
             description: 'User phone number, with international code.',
-            example: '+56912345678',
+            example: '2645632938',
           },
         },
       },

@@ -14,16 +14,28 @@ export default {
         required: true,
         type: 'string',
       },
-      {
-        name: 'id',
-        in: 'path',
-        description: 'id of the image',
-        schema: {
-          $ref: '#/components/schemas/FotoId',
-        },
-        type: 'string',
-      },
     ],
+    requestBody: {
+      required: true,
+      content: {
+        'application/json': {
+          schema: {
+            type: 'object',
+            properties: {
+              productId: {
+                $ref: '#/components/schemas/ProductId',
+              },
+              image: {
+                type: 'file',
+                description: 'An file',
+                example: 'imagen.jpg',
+              },
+            },
+          },
+        },
+      },
+    },
+
     responses: {
       200: {
         description: 'Return the image',

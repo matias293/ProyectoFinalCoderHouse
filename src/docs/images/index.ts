@@ -4,10 +4,10 @@ import deleteImages from './deleteImages';
 
 export default {
   'api/image/upload': {
-    ...getImage,
+    ...postImage,
   },
   'api/image/{id}': {
-    ...postImage,
+    ...getImage,
     ...deleteImages,
   },
 };
