@@ -4,8 +4,10 @@ import bcryptjs from 'bcryptjs';
 import { Error } from '../models/users/user.interface';
 import { generarJWT } from '../helpers/generarJWT';
 import logger from '../services/logger';
+import Config from '../config/index';
 import { UserAPI } from '../apis/users';
 import { schemaAuth, schemaLogin } from '../helpers/validators';
+import { EmailServiceEthereal } from '../services/ethereal';
 
 declare module 'express-session' {
   interface SessionData {
@@ -71,6 +73,12 @@ class Auth {
       };
       const user = await UserAPI.addUser(newUsuario);
 
+      const destination = Config.ETHEREAL_EMAIL;
+      const subject = 'Nuevo Registo';
+      const content = `
+        <p> El usuario ${result.email} creo un usuario  </p>
+        `;
+      EmailServiceEthereal.sendEmail(destination, subject, content);
       return res.status(201).json(user);
     } catch (err: any) {
       if (err.isJoi === true) err.statusCode = 400;
