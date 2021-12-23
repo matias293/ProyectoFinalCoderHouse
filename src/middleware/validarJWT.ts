@@ -31,7 +31,7 @@ export const validarJWT = async (
     const decoded: any = jwt.verify(token, Config.JWT_SECRET_KEY);
 
     if (!decoded) {
-      res.status(401).json({
+      res.status(400).json({
         msg: 'Token no válido',
       });
     }

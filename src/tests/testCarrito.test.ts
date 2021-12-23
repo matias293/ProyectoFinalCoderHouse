@@ -113,26 +113,27 @@ describe('Prueba de CARRITO', () => {
     // });
 
     describe('cartDao clearCart', () => {
-      it('deberia borrar correctamente todos los productos de la cartera', async () => {
-        // const id: string = '61bb66c19ff095990849acde';
-        // const mockResponse: CartI = {
-        //   direccion: {
-        //     calle: 'Las tilas',
-        //     altura: '1412',
-        //     cp: '5400',
-        //   },
-        //   _id: '61bb66c19ff095990849acde',
-        //   createdAt: '16/12/2021 13:17:49',
-        //   updatedAt: '16/12/2021 14:04:30',
-        //   products: [],
-        //   userId: '61bb66c19ff095990849acdb',
-        // };
-        // jest
-        //   .spyOn(CartModel.prototype, 'clearCart')
-        //   .mockResolvedValueOnce(mockResponse);
-        // const result = await daoTest.clearCart(id);
-        // expect(result).toEqual(mockResponse);
-      });
+      // it('deberia borrar correctamente todos los productos de la cartera', async () => {
+      //   const id: string = '61bb66c19ff095990849acde';
+      //   const mockResponse: CartI = {
+      //     direccion: {
+      //       calle: 'Las tilas',
+      //       altura: '1412',
+      //       cp: '5400',
+      //     },
+      //     _id: '61bb66c19ff095990849acde',
+      //     createdAt: '16/12/2021 13:17:49',
+      //     updatedAt: '16/12/2021 14:04:30',
+      //     products: [],
+      //     userId: '61bb66c19ff095990849acdb',
+      //   };
+      //   jest
+      //     .spyOn(CartModel.prototype, 'clearCart')
+      //     .mockResolvedValueOnce(mockResponse);
+      //   const result = await daoTest.clearCart(id);
+      //   console.log(result)
+      //   expect(result).toEqual(mockResponse);
+      // });
     });
   });
 });
