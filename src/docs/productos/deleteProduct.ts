@@ -30,12 +30,16 @@ export default {
         description: 'Producto borrado',
       },
       400: {
-        description: `Problem with the id  `,
+        description: ``,
         content: {
           'application/json': {
             schema: {
               type: 'object',
               properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
                 errId: {
                   $ref: '#/components/schemas/ErrorId',
                 },
@@ -53,8 +57,8 @@ export default {
           'application/json': {
             schema: {
               properties: {
-                errJWT: {
-                  $ref: '#/components/schemas/ErrorValidateJWT',
+                errUserNotExist: {
+                  $ref: '#/components/schemas/ErrorUserNotExist',
                 },
                 errRole: {
                   $ref: '#/components/schemas/ErrorAdmin',

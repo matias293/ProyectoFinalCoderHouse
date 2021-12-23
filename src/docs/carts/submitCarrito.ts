@@ -29,6 +29,10 @@ export default {
             schema: {
               type: 'object',
               properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
                 ErrorCarrito: {
                   type: 'object',
                   description: `Cart is doesnt't have products `,
@@ -51,11 +55,11 @@ export default {
         },
       },
       401: {
-        description: 'Error with token',
+        description: 'Error with login',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT',
+              $ref: '#/components/schemas/ErrorUserNotExist',
             },
           },
         },

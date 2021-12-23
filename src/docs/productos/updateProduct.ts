@@ -52,6 +52,10 @@ export default {
           'application/json': {
             schema: {
               properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
                 IdMongo: {
                   $ref: '#/components/schemas/ErrorIdMongo',
                 },
@@ -69,8 +73,8 @@ export default {
           'application/json': {
             schema: {
               properties: {
-                errJWT: {
-                  $ref: '#/components/schemas/ErrorValidateJWT',
+                eerrUserNotExist: {
+                  $ref: '#/components/schemas/ErrorUserNotExist',
                 },
                 errRole: {
                   $ref: '#/components/schemas/ErrorAdmin',

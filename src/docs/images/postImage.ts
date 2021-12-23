@@ -48,27 +48,31 @@ export default {
         },
       },
       400: {
-        description: 'Error with token or the user is not adming',
+        description: 'Error with the id or the token',
         content: {
           'application/json': {
             schema: {
-              type: 'object',
               properties: {
-                $ref: '#/components/schemas/ErrorId',
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
+                errId: { $ref: '#/components/schemas/ErrorId' },
               },
             },
           },
         },
       },
       401: {
-        description: 'Error with token or the user is not adming',
+        description: 'Error with login or the user is not admin ',
         content: {
           'application/json': {
             schema: {
               type: 'object',
               properties: {
-                errId: { $ref: '#/components/schemas/ErrorId' },
-                errJWT: { $ref: '#/components/schemas/ErrorValidateJWT' },
+                errUserNotExist: {
+                  $ref: '#/components/schemas/ErrorUserNotExist',
+                },
                 errAdmin: { $ref: '#/components/schemas/ErrorAdmin' },
               },
             },
@@ -76,7 +80,7 @@ export default {
         },
       },
       422: {
-        description: `Din't put any image on the request`,
+        description: `Didn't put any image on the request`,
         content: {
           'application/json': {
             schema: {

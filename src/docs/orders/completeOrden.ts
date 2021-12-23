@@ -68,12 +68,16 @@ export default {
         },
       },
       400: {
-        description: `Problem with the id `,
+        description: ` `,
         content: {
           'application/json': {
             schema: {
               type: 'object',
               properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
                 ErrorEstado: {
                   type: 'object',
                   description: `Status of the order it's not genrated`,

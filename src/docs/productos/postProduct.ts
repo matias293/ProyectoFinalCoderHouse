@@ -38,11 +38,17 @@ export default {
       },
 
       400: {
-        description: `Error in the input body`,
+        description: `Error in the input body or with the token`,
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorValidate',
+              properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
+                errorInput: { $ref: '#/components/schemas/ErrorValidate' },
+              },
             },
           },
         },
@@ -54,8 +60,8 @@ export default {
           'application/json': {
             schema: {
               properties: {
-                errJWT: {
-                  $ref: '#/components/schemas/ErrorValidateJWT',
+                errUserNotExist: {
+                  $ref: '#/components/schemas/ErrorUserNotExist',
                 },
                 errRole: {
                   $ref: '#/components/schemas/ErrorAdmin',

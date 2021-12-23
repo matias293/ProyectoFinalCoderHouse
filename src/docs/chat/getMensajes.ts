@@ -30,6 +30,36 @@ export default {
           },
         },
       },
+      400: {
+        description: 'Error with  the token',
+        content: {
+          'application/json': {
+            schema: {
+              properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
+              },
+            },
+          },
+        },
+      },
+      401: {
+        description: 'Error with login  ',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                errUserNotExist: {
+                  $ref: '#/components/schemas/ErrorUserNotExist',
+                },
+              },
+            },
+          },
+        },
+      },
       404: {
         description: `Didn't find any messages`,
         content: {

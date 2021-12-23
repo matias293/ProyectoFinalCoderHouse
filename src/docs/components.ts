@@ -337,7 +337,7 @@ export default {
           status: {
             type: 'number',
             description: 'Number of error',
-            example: '401',
+            example: '400',
           },
         },
       },
@@ -355,13 +355,13 @@ export default {
           status: {
             type: 'number',
             description: 'Number of error',
-            example: '401',
+            example: '400',
           },
         },
       },
       ErrorUserNotExist: {
         type: 'object',
-        description: `User not find in the DB`,
+        description: `User not find or bad password`,
 
         properties: {
           message: {

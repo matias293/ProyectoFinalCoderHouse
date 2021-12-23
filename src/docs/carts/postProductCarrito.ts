@@ -44,6 +44,10 @@ export default {
             schema: {
               type: 'object',
               properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
                 ErrorStock: {
                   type: 'object',
                   description: `Don't have that quantity on the stock `,
@@ -75,11 +79,11 @@ export default {
         },
       },
       401: {
-        description: 'Error with token',
+        description: 'Login Error',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT',
+              $ref: '#/components/schemas/ErrorUserNotExist',
             },
           },
         },

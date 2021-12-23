@@ -36,11 +36,17 @@ export default {
         },
       },
       400: {
-        description: `Problem with the id  `,
+        description: ` `,
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorId',
+              properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
+                errId: { $ref: '#/components/schemas/ErrorId' },
+              },
             },
           },
         },
@@ -50,7 +56,7 @@ export default {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT',
+              $ref: '#/components/schemas/ErrorAdmin',
             },
           },
         },

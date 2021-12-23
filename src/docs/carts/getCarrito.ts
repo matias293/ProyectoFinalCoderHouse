@@ -26,6 +26,35 @@ export default {
           },
         },
       },
+      400: {
+        description: `Error with the token`,
+        content: {
+          'application/json': {
+            schema: {
+              properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
+              },
+            },
+          },
+        },
+      },
+      401: {
+        description: `Login errors`,
+        content: {
+          'application/json': {
+            schema: {
+              properties: {
+                errUserNotExist: {
+                  $ref: '#/components/schemas/ErrorUserNotExist',
+                },
+              },
+            },
+          },
+        },
+      },
       404: {
         description: `The cart wasn't found `,
         content: {
@@ -37,16 +66,6 @@ export default {
         },
       },
 
-      401: {
-        description: 'Error with token',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT',
-            },
-          },
-        },
-      },
       500: {
         description: 'The token has expired',
         content: {

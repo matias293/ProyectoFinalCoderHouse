@@ -29,12 +29,28 @@ export default {
           },
         },
       },
+      400: {
+        description: ` `,
+        content: {
+          'application/json': {
+            schema: {
+              properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
+                errId: { $ref: '#/components/schemas/ErrorId' },
+              },
+            },
+          },
+        },
+      },
       401: {
         description: 'Error with token',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT',
+              $ref: '#/components/schemas/ErrorAdmin',
             },
           },
         },

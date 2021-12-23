@@ -50,9 +50,12 @@ export default {
                 errorIdOrCantidad: {
                   $ref: '#/components/schemas/ErrorIdAddDel',
                 },
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
                 ErrorQuantity: {
                   type: 'object',
-
                   properties: {
                     message: {
                       type: 'string',
@@ -78,11 +81,15 @@ export default {
         },
       },
       401: {
-        description: 'Error with token',
+        description: 'Login  errors`',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT',
+              properties: {
+                errUserNotExist: {
+                  $ref: '#/components/schemas/ErrorUserNotExist',
+                },
+              },
             },
           },
         },
