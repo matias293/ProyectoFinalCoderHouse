@@ -20,14 +20,11 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req: Request, file: Express.Multer.File, cb: any) => {
-  if (
-    file.mimetype === 'image/png' ||
-    file.mimetype === 'image/jpg' ||
-    file.mimetype === 'image/jpeg'
-  ) {
+  console.log(file);
+  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
     cb(null, true);
   } else {
-    cb(new Error('Image uploaded is not of type jpg/jpeg or png'), false);
+    cb(new Error('Image uploaded is not of type jpg or png'), false);
   }
 };
 
