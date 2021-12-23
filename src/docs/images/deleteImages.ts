@@ -31,6 +31,22 @@ export default {
           'application/json': {},
         },
       },
+      400: {
+        description: 'Error with the id or the token',
+        content: {
+          'application/json': {
+            schema: {
+              properties: {
+                errFindToken: { $ref: '#/components/schemas/ErrorTokenM' },
+                errTokenNotValid: {
+                  $ref: '#/components/schemas/ErrorTokenNotValid',
+                },
+                errId: { $ref: '#/components/schemas/ErrorId' },
+              },
+            },
+          },
+        },
+      },
       401: {
         description: 'Error with token or the user is not adming',
         content: {
@@ -38,8 +54,9 @@ export default {
             schema: {
               type: 'object',
               properties: {
-                errId: { $ref: '#/components/schemas/ErrorId' },
-                errJWT: { $ref: '#/components/schemas/ErrorValidateJWT' },
+                errUserNotExist: {
+                  $ref: '#/components/schemas/ErrorUserNotExist',
+                },
                 errAdmin: { $ref: '#/components/schemas/ErrorAdmin' },
               },
             },
