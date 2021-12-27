@@ -38,7 +38,7 @@ class Auth {
 
       const token = await generarJWT(user._id);
 
-      return res.json({ token });
+      return res.json({ token, msge: 'Se logeo correctamente ' });
     } catch (err: any) {
       if (err.isJoi === true) err.statusCode = 400;
       logger.error(err);
